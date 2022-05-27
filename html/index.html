@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="col">
+            <div class="row mb-4">
+                <button class="btn btn-primary fs-3" id="authorise-btn">Login with Google</button>
+                <button class="btn btn-primary" id="deauthorise-btn">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5" id="main" hidden>
+        <div class="col">
+            <!-- First row of parameters. -->
+            <div class="row mb-4">
+                <div class="col mb-2">
+                    <select class="form-select text-white text-center bg-primary" aria-label="Amount of Stops"
+                        id="stops-dropdown">
+                        <option selected hidden>Amount of Stops?</option>
+                        <option class="text-black bg-white" value="2">2 Stops</option>
+                        <option class="text-black bg-white" value="3">3 Stops</option>
+                        <option class="text-black bg-white" value="4">4 Stops</option>
+                    </select>
+                </div>
+
+                <div class="col mb-2">
+                    <select class="form-select text-white text-center bg-primary" aria-label="Tarp" id="tarp-dropdown">
+                        <option selected hidden>Tarp?</option>
+                        <option class="text-black bg-white" value="YES">With Tarp</option>
+                        <option class="text-black bg-white" value="NO">No Tarp</option>
+                    </select>
+                </div>
+
+                <div class="col mb-2">
+                    <div class="input-group w-100">
+                        <select class="form-select text-white text-center bg-primary" aria-label="Pickup Month"
+                            id="pickup-month-dropdown">
+                            <option selected hidden>Pickup Month</option>
+                            <option class="text-black bg-white" value="September">September</option>
+                            <option class="text-black bg-white" value="October">October</option>
+                            <option class="text-black bg-white" value="November">November</option>
+                            <option class="text-black bg-white" value="December">December</option>
+                        </select>
+
+                        <select class="form-select text-white text-center bg-primary" aria-label="Pickup Day"
+                            id="pickup-day-dropdown">
+                            <option selected hidden>Please Select a Month</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col mb-2">
+                    <select class="form-select text-white text-center bg-primary" aria-label="State"
+                        id="state-dropdown">
+                        <option selected hidden>State</option>
+                        <option class="text-black bg-white" value="VA">VA</option>
+                        <option class="text-black bg-white" value="MA/RI/CT">MA/RI/CT</option>
+                        <option class="text-black bg-white" value="Other States / Trash #">Other States / Trash #
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Broker</span> <!-- SAVE! -->
+                        <input type="text" id="broker-name" list="saved-broker-names" class='form-control'>
+
+                    </div>
+                    <datalist id="saved-broker-names">
+                    </datalist>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Driver</span> <!-- SAVE! -->
+                        <input type="text" id="driver-name" list="saved-driver-names" class='form-control'>
+
+                    </div>
+                    <datalist id="saved-driver-names">
+                    </datalist>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Dispatcher</span> <!-- SAVE! -->
+                        <input type="text" id="dispatcher-name" list="saved-dispatcher-names" class='form-control'>
+
+                    </div>
+                    <datalist id="saved-dispatcher-names">
+                    </datalist>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Carrier</span>
+                        <input type="text" class='form-control' id='carrier-name'>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Load #</span>
+                        <input type="number" class='form-control' id="load-num">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Delv. Date</span>
+                        <input type="date" class='form-control' id="delv-date">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="input-group">
+                        <span class="input-group-text">Rate</span>
+                        <input type="number" class='form-control' id="rate-num">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stop 1 + Upload buttons -->
+
+            <div id="stop-1">
+                <div class="row">
+                    <span class="text-primary">Stop 1</span>
+                </div>
+                <div class="row mb-5">
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Company Name</span>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Pickup Address</span>
+                            <input type="text" class="form-control" id='address-field-1'>
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Notes</span>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <input type="file" class="form-control" id="doc-upload-1">
+                            <span class="input-group-text">Upload 1</span>
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <input type="file" class="form-control" id="doc-upload-2">
+                            <span class="input-group-text">Upload 2</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id='stop-2'>
+                <!-- Stop 2 -->
+                <div class="row">
+                    <span class="text-primary">Stop 2</span>
+                </div>
+                <div class="row mb-5">
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Company Name</span>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Deliver Address</span>
+                            <input type="text" class="form-control" id='address-field-2'>
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Notes</span>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+
+            <div id='stop-3' hidden>
+                <!-- Stop 3 -->
+                <div class="row">
+                    <span class="text-primary">Stop 3</span>
+                </div>
+                <div class="row mb-5">
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Company Name</span>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Deliver Address</span>
+                            <input type="text" class="form-control" id='address-field-3'>
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Notes</span>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+
+            <div id='stop-4' hidden>
+                <!-- Stop 4 -->
+                <div class="row">
+                    <span class="text-primary">Stop 4</span>
+                </div>
+                <div class="row mb-5">
+                    <div class="col">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Company Name</span>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Deliver Address</span>
+                            <input type="text" class="form-control" id='address-field-4'>
+                        </div>
+
+                        <div class="input-group mb-2">
+                            <span class="input-group-text">Notes</span>
+                            <textarea class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
+            </div>
+
+            <div class="row mb-5">
+                <div class="col">
+                    <div class="position-relative">
+                        <div class="position-absolute translate-middle-x start-50">
+                            <button class="btn btn-primary" id="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" tabindex="-1" id="copy-info-modal">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn btn-close" data-bs-dismiss='modal'></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col" id='info-body'>
+                                <!-- Elements will be added here procedurally. -->
+
+                                <div class="row mb-5">
+                                    <div class="col">
+                                        <div class="position-relative">
+                                            <div class="position-absolute translate-middle-x start-50">
+                                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#copied-success-modal">Copy</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" tabindex="-1" id="copied-success-modal">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn btn-close" data-bs-dismiss='modal'></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col" id='info-body'>
+                                <div class="row mb-5">
+                                    <div class="text-success text-center mb-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"
+                                            fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="text-center mb-5">
+                                        <h5>
+                                            Copied to your clipboard!
+                                        </h5>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="position-relative">
+                                            <div class="position-absolute translate-middle-x start-50">
+                                                <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" tabindex="-1" id="error-modal">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn btn-close" data-bs-dismiss='modal'></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col" id='info-body'>
+                                <div class="row mb-5">
+                                    <div class="text-danger text-center mb-5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"
+                                            fill="currentColor" class="bi bi-exclamation-circle-fill"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="text-center mb-5">
+                                        <h5 id='error-modal-text'>
+                                            Copied to your clipboard!
+                                        </h5>
+                                    </div>
+
+                                    <div class="col">
+                                        <div class="position-relative">
+                                            <div class="position-absolute translate-middle-x start-50">
+                                                <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+
+    <script src="../js/ui.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/drive_manager.js"></script>
+    <script src="../js/sheets_api.js"></script>
+
+    <script src="../js/address_autocomplete.js"></script>
+    <script src="../js/form_submission.js"></script>
+    <script src="../js/dropdown_options.js"></script>
+
+    <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=()=>{};handle_client_load()"
+        onreadystatechange="if (this.readyState === 'complete') {this.onload()}"></script>
+</body>
+
+</html>
